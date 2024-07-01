@@ -15,9 +15,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ImageController extends AbstractController
 {
-    #[Route('/image/add', name: 'add_image')]
+    #[Route('/admin/image/add', name: 'add_image')]
     public function index(Request $request, EntityManagerInterface $manager, ImageRepository $imageRepository): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')){
+            return $this->redirectToRoute('app_product');
+        }
+
         $image = new Image();
         $formImage = $this->createForm(ImageType::class, $image);
         $formImage->handleRequest($request);
