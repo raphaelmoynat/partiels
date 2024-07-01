@@ -34,4 +34,13 @@ class ImageController extends AbstractController
         return $this->render("image/index.html.twig", ['formImage' => $formImage->createView(), "images"=>$imageRepository->findAll()]);
 
     }
+
+    #[Route('admin//delete/image/{id}', name: 'delete_image')]
+    public function delete(EntityManagerInterface $manager, Image $image)
+    {
+        $manager->remove($image);
+        $manager->flush();
+        return $this->redirectToRoute("add_image"
+        );
+    }
 }
