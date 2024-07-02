@@ -17,7 +17,7 @@
                         <p class="card-text text-muted">{{ film.description }}</p>
                     </div>
                     <div class="card-footer border-top-0">
-                            <div class="d-flex justify-content-center align-items-center"> {# Modification ici #}
+                            <div class="d-flex justify-content-center align-items-center">
                                 {% if app.user %}
 
                                         <a href="{{ path('seance_film', {id: film.id}) }}" class="btn btn-primary btn-sm">Réserver</a>

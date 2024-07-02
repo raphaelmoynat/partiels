@@ -26,6 +26,9 @@ class Booking
     #[ORM\Column]
     private ?int $siege = null;
 
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    private ?PaymentMethod $paymentMethod = null;
+
 
 
 
@@ -73,6 +76,18 @@ class Booking
     public function setSiege(int $siege): static
     {
         $this->siege = $siege;
+
+        return $this;
+    }
+
+    public function getPaymentMethod(): ?PaymentMethod
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod(?PaymentMethod $paymentMethod): static
+    {
+        $this->paymentMethod = $paymentMethod;
 
         return $this;
     }

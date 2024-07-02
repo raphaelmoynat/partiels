@@ -12,13 +12,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class BookingController extends AbstractController
 {
-    #[Route('/booking', name: 'app_booking')]
-    public function index(): Response
+    #[Route('/booking/success', name: 'app_success')]
+    public function success(): Response
     {
-        return $this->render('booking/index.html.twig', [
+        return $this->render('booking/success.html.twig', [
             'controller_name' => 'BookingController',
         ]);
     }
+
 
     #[Route('/booking/{id}', name: 'booking_create', methods: ['POST'])]
     public function create($id, Request $request, SeanceRepository $seanceRepository, EntityManagerInterface $manager): Response
@@ -38,6 +39,6 @@ class BookingController extends AbstractController
 
         $manager->flush();
 
-        return $this->redirectToRoute('seance_show', ['id' => $id]);
+        return $this->redirectToRoute('app_success');
     }
 }

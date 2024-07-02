@@ -35,7 +35,7 @@
 
 
 
-                    <a href="" class="nav-link text-warning">{{ app.user.email }}</a>
+                    <a href="{{ path('app_profile') }}" class="nav-link text-warning">{{ app.user.email }}</a>
                 {% endif %}
 
                 {% if app.user %}
