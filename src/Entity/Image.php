@@ -31,6 +31,9 @@ class Image
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Film $film = null;
+
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -79,5 +82,17 @@ class Image
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getFilm(): ?Film
+    {
+        return $this->film;
+    }
+
+    public function setFilm(?Film $film): static
+    {
+        $this->film = $film;
+
+        return $this;
     }
 }

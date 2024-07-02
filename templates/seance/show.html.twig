@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center mb-3">
+                        <h1 class="card-title mb-3">{{ seance.film.title }}</h1>
+                        <p class="card-text">{{ seance.film.description }}</p>
+                    </div>
+                    <div class="card-body text-center align-items-center">
+                        <h2 class="card-title mb-4">Plan de la salle</h2>
+                        <form action="{{ path('booking_create', {id: seance.id}) }}" method="post" class="d-flex flex-column align-items-center">
+                            <div class="seating-plan">
+                                {% for siege, isReserved in plan %}
+                                    <div class="siege {% if isReserved %}reserved{% else %}available{% endif %}">
+                                        {% if not isReserved %}
+                                            <input type="radio" name="siege" id="siege{{ siege }}" value="{{ siege }}">
+                                            <label for="siege_{{ siege }}">{{ siege }}</label>
+                                        {% else %}
+                                            <span class="text-muted">{{ siege }}</span>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4">Réserver</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

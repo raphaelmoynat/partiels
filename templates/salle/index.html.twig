@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="mb-4 text-center">Liste des Salles</h1>
+
+        {% if salles is empty %}
+            <div class="alert alert-info text-center">
+                <p>Aucune salle n'a été créée pour le moment.</p>
+            </div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Capacité</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for salle in salles %}
+                        <tr>
+                            <td>{{ salle.name }}</td>
+                            <td>{{ salle.capacity }}</td>
+                            <td>
+                                <a href="{{ path('salle_edit', {id: salle.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                                <a href="{{ path('salle_delete', {id: salle.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette salle ?');">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        <div class="card shadow-sm mt-5">
+            <div class="card-header">
+                <h2 class="mb-0">Ajouter une Nouvelle Salle</h2>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.capacity) }}
+                    {{ form_widget(form.capacity, {'attr': {'class': 'form-control'}}) }}
+
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter la Salle</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

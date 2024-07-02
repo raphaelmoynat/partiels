@@ -1,3 +1,31 @@
 body {
     background-color: skyblue;
 }
+
+
+.seating-plan {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    justify-content: center;
+}
+
+.siege {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.siege.reserved {
+    background-color: #f00;
+    cursor: not-allowed;
+}
+
+.siege.available {
+    background-color: #0f0;
+}

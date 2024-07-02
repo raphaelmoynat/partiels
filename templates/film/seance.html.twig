@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="mb-5">
+            <a href="{{ path('app_film') }}" class="btn btn-primary my-3"><i class="bi bi-arrow-left"></i> Retour</a>
+        </div>
+
+        <h2 class="mb-5 text-center">Séances pour {{ film.title }}</h2>
+
+        {% if seances is not empty %}
+            <div class="d-flex justify-content-center align-items-center">
+            <ul class="list-group">
+                {% for seance in seances %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="me-5">
+                            {{ seance.date|date('d/m/Y') }} - {{ seance.time|date('H:i') }}
+                        </div>
+                        <div class="me-5">
+                            Prix : {{ seance.price }}€
+                        </div>
+                        <a href="{{ path('seance_show', {id: seance.id}) }}" class="btn btn-primary">Réserver</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            </div>
+        {% else %}
+            <p>Aucune séance disponible pour ce film.</p>
+        {% endif %}
+    </div>
+{% endblock %}

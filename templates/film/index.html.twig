@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="d-flex justify-content-start mb-3">
+            <h1 class="text-center mb-5">Tous les films à l'affiche</h1>
+
+        </div>
+
+
+
+        <div class="row">
+            {% for film in films|reverse %}
+                <div class="col-lg-4 col-md-6 mb-5">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative">
+                            {% include "image/image_or_not.html.twig" with {object:film} %}
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-3">{{ film.title }}</h5>
+                            <p class="card-text text-muted">{{ film.description }}</p>
+
+                        </div>
+                        <div class="card-footer border-top-0">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <a href="{{ path("app_show_film", {id: film.id}) }}" class="btn btn-outline-primary btn-sm ms-2">Voir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

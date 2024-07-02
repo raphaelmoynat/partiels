@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Film;
 use App\Entity\Image;
 
+use App\Entity\Product;
 use App\Form\ImageType;
 
 use App\Repository\ImageRepository;
@@ -15,11 +17,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ImageController extends AbstractController
 {
-    #[Route('/admin/image/add', name: 'add_image')]
-    public function index(Request $request, EntityManagerInterface $manager, ImageRepository $imageRepository): Response
+    #[Route('/admin/image/add/{id}', name: 'add_image')]
+    public function index($id, Request $request, EntityManagerInterface $manager, ImageRepository $imageRepository): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')){
-            return $this->redirectToRoute('app_product');
+            return $this->redirectToRoute('app_film');
         }
 
         $image = new Image();
@@ -27,11 +29,13 @@ class ImageController extends AbstractController
         $formImage->handleRequest($request);
         if($formImage->isSubmitted() && $formImage->isValid())
         {
+
+            $image->setFilm($manager->getRepository(Film::class)->find($id));
             $manager->persist($image);
             $manager->flush();
-            return $this->redirectToRoute("app_home");
+
         }
-        return $this->render("image/index.html.twig", ['formImage' => $formImage->createView(), "images"=>$imageRepository->findAll()]);
+        return $this->redirectToRoute("film_image", ["id"=>$id]);
 
     }
 

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card col-6">
+            <div class="card-header">
+                <h5 class="card-title">Formulaire d'ajout de séance</h5>
+            </div>
+            <div class="card-body">
+                {{ form_start(form, {'attr': {'class': 'mb-3'}}) }}
+
+                <div class="mb-3">
+                    {{ form_row(form.film, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.salle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.time, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Créer la séance</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
